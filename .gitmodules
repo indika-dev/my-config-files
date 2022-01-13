@@ -1,0 +1,3 @@
+[submodule "ubuntu-wsl2-systemd-script"]
+	path = ubuntu-wsl2-systemd-script
+	url = https://github.com/alfink/ubuntu-wsl2-systemd-script
