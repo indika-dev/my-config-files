@@ -4,3 +4,12 @@
 [submodule ".config/kitty/vim-kitty-navigator"]
 	path = .config/kitty/vim-kitty-navigator
 	url = https://github.com/knubie/vim-kitty-navigator.git
+[submodule ".themes/WhiteSur-gtk-theme"]
+	path = .themes/WhiteSur-gtk-theme
+	url = https://github.com/vinceliuice/WhiteSur-gtk-theme.git
+[submodule ".themes/Os-Catalina-gtk"]
+	path = .themes/Os-Catalina-gtk
+	url = https://github.com/zayronxio/Os-Catalina-gtk.git
+[submodule ".themes/Os-Catalina-Gtk-night"]
+	path = .themes/Os-Catalina-Gtk-night
+	url = https://github.com/zayronxio/Os-Catalina-Gtk-night.git
