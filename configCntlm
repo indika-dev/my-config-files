@@ -1,0 +1,34 @@
+#!/bin/sh
+#case "$2" in
+#	hostname)
+          #IP=`/sbin/ifconfig  | grep 'inet'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $2}'`
+	  # at home Laptop has a static ip address
+	  IP=`/mnt/c/Windows/System32/ipconfig.exe | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.53'`
+	  case $IP in
+             192.*)
+                #logger "setNoProxy.sh -set NoProxy for enterprise net"
+                #NoProxy="NoProxy         localhost, 127.0.0.*, 10.*, 192.168.*"
+            		logger "setNoProxy.sh - set NoProxy for direct net"
+                echo "no enterprise net detected ...configure cntlm"
+                NoProxy="NoProxy *"
+                ;;
+               *)
+                #logger "setNoProxy.sh - set NoProxy for direct net"
+                #NoProxy="NoProxy *"
+		            logger "setNoProxy.sh -set NoProxy for enterprise net"
+                echo "enterprise net detected ...configure cntlm and set envvars"
+                NoProxy="NoProxy         localhost, 127.0.0.*, 10.*, 192.168.*"
+                # proxy environment settings
+                export http_proxy=http://127.0.0.1:3128
+                export https_proxy=$http_proxy
+                export HTTP_PROXY=$http_proxy
+                export HTTPS_PROXY=$https_proxy
+                export FTP_PROXY=$http_proxy
+                export RSYNC_PROXY=$http_proxy
+                ;;
+            esac
+         sudo sed "s/^NoProxy.*$/$NoProxy/g" -i /etc/cntlm.conf
+         sudo service cntlm restart
+#         ;;
+#esac
+
