@@ -1,0 +1,4 @@
+npm onfig set prefix $HOME/.local/share/n
+npm config set cache $HOME/.npm/
+
+export N_PREFIX=/home/stefan/.local/share/n

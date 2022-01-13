@@ -1,0 +1,3 @@
+export LUA_PATH='/usr/local/share/lua/5.1/?.lua;./?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;/home/stefan/.luarocks/share/lua/5.1/?.lua;/home/stefan/.luarocks/share/lua/5.1/?/init.lua'
+export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home/stefan/.luarocks/lib/lua/5.1/?.so'
+export PATH=$PATH:/home/stefan/.luarocks/bin
