@@ -1,0 +1,1 @@
+ssh -vvv -i ~/.ssh/id_maassens-cloud  -N -L 127.0.0.1:29316:185.194.141.32:29316 core@maassens-cloud.de

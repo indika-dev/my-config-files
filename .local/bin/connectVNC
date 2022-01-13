@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# ssh -vvv -i ~/.ssh/id_maassens-cloud -N stefan@maassens-cloud.de -L localhost:5900:185.194.141.32:5900
+# ssh -vvv -i ~/.ssh/id_maassens-cloud -N stefan@maassens-cloud.de -R 5900:localhost:5901 maassens-cloud.de &
+ssh -vvv -i ~/.ssh/id_maassens-cloud -N -L 5900:localhost:5900 stefan@maassens-cloud.de
+
+

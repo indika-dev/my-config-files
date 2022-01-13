@@ -1,0 +1,6 @@
+[submodule ".config/kitty/kitty-themes"]
+	path = .config/kitty/kitty-themes
+	url = https://github.com/dexpota/kitty-themes.git
+[submodule ".config/kitty/vim-kitty-navigator"]
+	path = .config/kitty/vim-kitty-navigator
+	url = https://github.com/knubie/vim-kitty-navigator.git

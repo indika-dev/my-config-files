@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Ultima Underworld 1
+Type=Application
+Icon=uw1
+Terminal=0
+Categories=Game;
+Path=/home/stefan/Games/uwexporter/dosdevices/c:/uwexporter
+Exec=env WINEPREFIX="/home/stefan/Games/uwexporter" wine C:\\\\uwexporter\\\\Underworld\ Exporter.exe
