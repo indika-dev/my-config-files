@@ -4,6 +4,12 @@ local launch_menu = {}
 local default_prog
 local set_environment_variables = {}
 
+-- The filled in variant of the < symbol
+local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+
+-- The filled in variant of the > symbol
+local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
+
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	table.insert(launch_menu, {
 		label = "PowerShell",
@@ -67,7 +73,7 @@ return {
 	font = wezterm.font("CaskaydiaCove NF"),
 	color_scheme = "Ayu Mirage",
 	default_prog = { "powershell.exe -NoLogo" },
-	hide_tab_bar_if_only_one_tab = true,
+	hide_tab_bar_if_only_one_tab = false,
 	launch_menu = launch_menu,
 	tls_clients = {
 		{
@@ -76,6 +82,28 @@ return {
 			remote_address = "localhost:5000",
 		},
 	},
+    tab_bar_style = {
+        active_tab_left = wezterm.format({
+          {Background={Color="#0b0022"}},
+          {Foreground={Color="#2b2042"}},
+          {Text=SOLID_LEFT_ARROW},
+        }),
+        active_tab_right = wezterm.format({
+          {Background={Color="#0b0022"}},
+          {Foreground={Color="#2b2042"}},
+          {Text=SOLID_RIGHT_ARROW},
+        }),
+        inactive_tab_left = wezterm.format({
+          {Background={Color="#0b0022"}},
+          {Foreground={Color="#1b1032"}},
+          {Text=SOLID_LEFT_ARROW},
+        }),
+        inactive_tab_right = wezterm.format({
+          {Background={Color="#0b0022"}},
+          {Foreground={Color="#1b1032"}},
+          {Text=SOLID_RIGHT_ARROW},
+        }),
+  },
 	-- unix_domains = {
 	-- 	{
 	-- 		name = "local",
