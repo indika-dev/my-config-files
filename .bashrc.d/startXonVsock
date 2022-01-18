@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+if [[ -z $(pidof -s socat) ]]; then
+	if [[ -S /tmp/.X11-unix/X0 ]]; then
+		rm /tmp/.X11-unix/X0
+	fi
+	sudo socat -b65536 UNIX-LISTEN:/tmp/.X11-unix/X0,fork,mode=777 vsock-connect:2:106000 >/dev/null 2>&1 &
+fi
+export DISPLAY=:0
+export LIBGL_ALWAYS_INDIRECT=1
+export XDG_CURRENT_DESKTOP=ubuntu:mate
+export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
