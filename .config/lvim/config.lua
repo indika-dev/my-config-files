@@ -7,7 +7,7 @@ a global executable or a path to
 an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-vim.o.guifont = "JetBrainsMono Nerd Font:h14"
+vim.o.guifont = "JetBrainsMono Nerd Font:h12"
 -- vim.o.guifont ="Delugia:h16"
 -- vim.o.guifont ="DelugiaMono:h16"
 -- vim.o.guifont ="GoMono NF:h16"
@@ -371,5 +371,14 @@ lvim.keys.normal_mode["<C-l>"] = ":KittyNavigateRight<cr>"
 -- vim.api.nvim_set_keymap("n", "<C-S-j>","<cmd>KittyNavigateDown<CR>" , { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<C-S-k>", "<cmd>KittyNavigateUp<CR>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<C-S-l>", "<cmd>KittyNavigateRight<CR>", { noremap = true, silent = true })
+
+-- This config here is for nvui
+if vim.g.nvui then
+-- Set gui font
+  cmd [[set guifont=FiraCode\ Nerd\ Font:h9]]
+  cmd [[NvuiCmdFontFamily FiraCode Nerd Font]]
+  cmd [[NvuiCmdFontSize 9.0]]
+  cmd [[NvuiScrollAnimationDuration 0.2]]
+end
 
 vim.cmd("source ~/.vimrc")
