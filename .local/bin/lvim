@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -euo pipefail
 
 export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-/home/stefan/.config/lvim}"
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-/home/stefan/.local/share/lunarvim}"
