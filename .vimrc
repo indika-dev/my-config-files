@@ -1,4 +1,4 @@
-
+autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
 " if "g:neovide"
   set winaltkeys=yes
   for s:char in split('¶¡@£$€¥[]\±þ←đŋ©®ł¸~æœ€↓→ðħŧłß̣̣̣´|·@©ĸ»”µł“«^', '\zs')

@@ -8,5 +8,13 @@ if [[ -z $(pidof -s socat) ]]; then
 fi
 export DISPLAY=:0
 export LIBGL_ALWAYS_INDIRECT=1
-export XDG_CURRENT_DESKTOP=ubuntu:mate
 export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+
+export XDG_SESSION_TYPE="x11"
+export XDG_RUNTIME_DIR=/run/user/1000
+export XDG_SESSION_CLASS="user"
+export XDG_SESSION_DESKTOP=ubuntu
+# export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+export XDG_CURRENT_DESKTOP=ubuntu:mate
+export DESKTOP_SESSION=ubuntu
+export GDMSESSION=ubuntu

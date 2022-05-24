@@ -1,3 +1,3 @@
-export LIBGL_ALWAYS_INDIRECT=1
-export XDG_CURRENT_DESKTOP=ubuntu:mate
+# export LIBGL_ALWAYS_INDIRECT=1
+# export XDG_CURRENT_DESKTOP=ubuntu:mate
 
