@@ -40,6 +40,9 @@ call vundle#begin('~/AppData/Local/nvim/plugged')
     Plugin 'junegunn/goyo.vim'                           " Distraction-free viewing
     Plugin 'junegunn/limelight.vim'                      " Hyperfocus on a range
     Plugin 'junegunn/vim-emoji'                          " Vim needs emojis!
+    Plugin 'junegunn/fzf'
+    Plugin 'junegunn/fzf.vim'
+    Plugin 'michal-h21/vim-zettel'
 
 call vundle#end()
 
@@ -70,7 +73,9 @@ set number relativenumber       " Display line numbers
 set clipboard=unnamedplus       " Copy/paste between vim and other programs.
 syntax enable
 let g:rehash256 = 1
-
+let g:joplin_token = '2deab76b2fb28d71928f31fa1d4f9de9efbbf77958f8e080d9adc0b5aa681b679325bbfdb53fd4ab06f644d8472b9fcef24e4195fa6530382834335ca03fd633'
+let g:python3_host_prog = 'C:/Python310/python.exe' 
+let g:python_host_prog = 'C:/Python27/python.exe' 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Remap Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

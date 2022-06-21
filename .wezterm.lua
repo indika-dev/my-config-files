@@ -70,9 +70,10 @@ end
 
 return {
 	add_wsl_distributions_to_launch_menu = true,
-	font = wezterm.font("CaskaydiaCove NF"),
+	font = wezterm.font("FiraCode NF", {weight=450}),
+    font_size = 11,
 	color_scheme = "Ayu Mirage",
-	default_prog = { "powershell.exe -NoLogo" },
+	default_prog = { "wsl", "--cd", "~" },
 	hide_tab_bar_if_only_one_tab = false,
 	launch_menu = launch_menu,
 	tls_clients = {
@@ -128,7 +129,7 @@ return {
 		{
 			key = "-",
 			mods = "LEADER",
-			action = wezterm.action({ SplitVertical = { args = { "powershell.exe" } } }),
+			action = wezterm.action({ SplitVertical = { args = { "wsl", "--cd", "~" } } }),
 		},
 		{ key = "n", mods = "LEADER", action = "ShowTabNavigator" },
 		{ key = "l", mods = "LEADER", action = "ShowLauncher" },

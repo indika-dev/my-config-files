@@ -1,7 +1,12 @@
 {
+    "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
+        {
+            "command": "paste",
+            "keys": "ctrl+shift+v"
+        },
         {
             "command": 
             {
@@ -13,10 +18,6 @@
         {
             "command": "find",
             "keys": "ctrl+shift+f"
-        },
-        {
-            "command": "paste",
-            "keys": "ctrl+shift+v"
         },
         {
             "command": 
@@ -37,6 +38,31 @@
         "list": 
         [
             {
+                "colorScheme": "Ayu",
+                "font": 
+                {
+                    "face": "FiraCode NF Retina",
+                    "size": 11
+                },
+                "guid": "{639d9e7f-51b3-5af2-8625-118dd6674fe9}",
+                "hidden": false,
+                "icon": "C:\\Lokales\\vm\\wsl\\clearlinux\\clearlinux.png",
+                "name": "Clear Linux",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "colorScheme": "Ayu Mirage",
+                "font": 
+                {
+                    "face": "CaskaydiaCove NF",
+                    "size": 12
+                },
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+            },
+            {
                 "antialiasingMode": "cleartype",
                 "bellStyle": "none",
                 "colorScheme": "Ayu Mirage",
@@ -45,14 +71,20 @@
                     "face": "CaskaydiaCove NF",
                     "size": 12
                 },
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "guid": "{190101b4-7fde-5219-90b2-0947ed51033f}",
                 "hidden": false,
-                "name": "Ubuntu-20.04",
+                "icon": "C:\\Lokales\\vm\\wsl\\fedora\\fedora.png",
+                "name": "fedora",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{d3f31bee-5823-5ed8-8e04-f31ed54f2cd9}",
+                "hidden": false,
+                "name": "Fedora Remix for WSL",
                 "source": "Windows.Terminal.Wsl"
             },
             {
                 "colorScheme": "Ayu Mirage",
-                "commandline": "powershell.exe",
                 "font": 
                 {
                     "face": "CaskaydiaCove NF"
@@ -63,7 +95,6 @@
             },
             {
                 "colorScheme": "Tango Dark",
-                "commandline": "cmd.exe",
                 "font": 
                 {
                     "face": "Cascadia Code PL"
@@ -81,25 +112,29 @@
             {
                 "colorScheme": "Ayu Mirage",
                 "commandline": "C:\\ProgramData\\chocolatey\\lib\\gsudo\\bin\\gsudo.exe powershell.exe",
+                "guid": "{a99d3bc0-0407-50bc-9051-8d0d088de641}",
                 "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
                 "name": "PowerShell(Admin)",
                 "tabTitle": "PowerShell"
             },
             {
-                "colorScheme": "Ayu Mirage",
-                "font": 
-                {
-                    "face": "CaskaydiaCove NF"
-                },
-                "guid": "{15b79c30-8a4a-5639-b4fc-66e8442c8bb6}",
-                "hidden": false,
-                "name": "Manjaro",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "commandline": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw-w64.bat",
+                "guid": "{7dee22e8-fd42-5c82-9fa9-9ad072dda177}",
                 "icon": "C:\\Lokales\\development\\Mingw64.png",
                 "name": "Mingw64"
+            },
+            {
+                "background": "#350425",
+                "commandline": "multipass shell",
+                "cursorShape": "filledBox",
+                "font": 
+                {
+                    "face": "Ubuntu Mono"
+                },
+                "guid": "{aaaa9e6d-1e09-4be6-b76c-82b4ba1885fb}",
+                "historySize": 50000,
+                "icon": "C:/Program Files/Multipass/bin/multipass_wt.ico",
+                "name": "Multipass"
             }
         ]
     },
@@ -196,6 +231,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#CCCCCC",
             "yellow": "#C19C00"
+        },
+        {
+            "background": "#1E1E1E",
+            "black": "#171421",
+            "blue": "#12488B",
+            "brightBlack": "#5E5C64",
+            "brightBlue": "#2A7BDE",
+            "brightCyan": "#33C7DE",
+            "brightGreen": "#33DA7A",
+            "brightPurple": "#C061CB",
+            "brightRed": "#F66151",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#E9AD0C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#2AA1B3",
+            "foreground": "#E8E8E8",
+            "green": "#26A269",
+            "name": "Fedora Remix for WSL",
+            "purple": "#A347BA",
+            "red": "#C01C28",
+            "selectionBackground": "#FFFFFF",
+            "white": "#D0CFCC",
+            "yellow": "#A2734C"
         },
         {
             "background": "#282C34",
@@ -380,6 +438,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#787C99",
             "yellow": "#E0AF68"
+        },
+        {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "UbuntuColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
         },
         {
             "background": "#000000",
