@@ -1,3 +1,6 @@
 [submodule "ubuntu-wsl2-systemd-script"]
 	path = ubuntu-wsl2-systemd-script
 	url = https://github.com/alfink/ubuntu-wsl2-systemd-script
+[submodule ".tmux/plugins/tmux-colors-ayu"]
+	path = .tmux/plugins/tmux-colors-ayu
+	url = https://github.com/jibingeo/tmux-colors-ayu.git
