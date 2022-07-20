@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=ACDSee
+Exec=distrobox enter archlinux -- bash -l -c '"cd /var/home/stefan/.wine/drive_c/Program\ Files\ \(x86\)/ACDSee32/ && wine ACDSee32.exe"'
+Type=Application
+StartupNotify=true
+Path=/var/home/stefan/.wine/drive_c/Program Files (x86)/ACDSee32
+Icon=acdsee
+StartupWMClass=ACDSee32.exe

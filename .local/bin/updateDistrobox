@@ -1,0 +1,113 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# This file is part of the distrobox project: https://github.com/89luca89/distrobox
+#
+# Copyright (C) 2021 distrobox contributors
+#
+# distrobox is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3
+# as published by the Free Software Foundation.
+#
+# distrobox is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with distrobox; if not, see <http://www.gnu.org/licenses/>.
+
+# POSIX
+
+verbose=0
+
+# Print usage to stdout.
+# Arguments:
+#   None
+# Outputs:
+#   print usage with examples.
+show_help() {
+	cat <<EOF
+uninstall --prefix /usr/local
+
+Options:
+	--prefix/-P:		base bath where all files will be deployed (default /usr/local if root, ~/.local if not)
+	--path/-p:		(DEPRECATED) path where to deploy the files (default /usr/local/bin if root, ~/.local/bin if not)
+	--help/-h:		show this message
+	-v:			show more verbosity
+EOF
+}
+
+# Parse arguments
+while :; do
+	case $1 in
+	-h | --help)
+		# Call a "show_help" function to display a synopsis, then exit.
+		show_help
+		exit
+		;;
+	-v | --verbose)
+		shift
+		verbose=1
+		;;
+	-p | --path)
+		if [ -n "$2" ]; then
+			dest_path="$2"
+			shift
+			shift
+		fi
+		;;
+	-P | --prefix)
+		if [ -n "$2" ]; then
+			prefix="$2"
+			shift
+			shift
+		fi
+		;;
+	*) # Default case: If no more options then break out of the loop.
+		break ;;
+	esac
+done
+
+if [ -n "${dest_path}" ] && [ -n "${prefix}" ]; then
+	printf >&2 "Both -p and -P are set. Cannot continue. Exiting.\n"
+	exit 1
+fi
+
+if [ -z "${dest_path}" ]; then
+	if [ -z "${prefix}" ]; then
+		prefix="/usr/local"
+		# in case we're not root, just default to the home directory
+		if [ "$(id -u)" -ne 0 ]; then
+			prefix="${HOME}/.local"
+		fi
+	fi
+	dest_path="${prefix}/bin"
+	man_dest_path="${prefix}/share/man/man1"
+else
+	printf >&2 "Warning: -p/--path is deprecated. Please refer to the documentation and switch to -P/--prefix.\n"
+	# dest_path is already set
+	man_dest_path="${dest_path}/../share/man/man1"
+fi
+
+set -o errexit
+set -o nounset
+# set verbosity
+if [ "${verbose}" -ne 0 ]; then
+	set -o xtrace
+fi
+
+# Ensure the foundamental variables are set and not empty, we will not proceed if
+# they are not all set.
+[ ! -w "${dest_path}" ] && printf >&2 "Cannot write into %s, permission denied.\n" "${dest_path}/bin" && exit 1
+
+# uninstall
+for file in "${dest_path}/distrobox"*; do
+	[ -e "${file}" ] && rm -f "${file}"
+done
+for file in "${man_dest_path}/distrobox"*; do
+	[ -e "${file}" ] && rm -f "${file}"
+done
+echo "Uninstall complete."
+
+curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --prefix /var/home/stefan/.local
