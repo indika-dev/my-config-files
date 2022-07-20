@@ -1,9 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=devilutionX
+Name=Diablo and Hellfire
 Type=Application
 Icon=devilutionX
-Terminal=0
-Categories=Game;BoardGame;
-Path=/home/stefan/Games/gog/diablo/devilutionx/
-Exec=/home/stefan/Games/gog/diablo/devilutionx/devilutionx.sh
+Terminal=false
+Categories=Game;BoardGame;Diablo
+Exec=/home/stefan/Applications/devilutionx-linux-x86_64.appimage

@@ -230,7 +230,7 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 lspconfig.sumneko_lua.setup {
-  cmd = { vim.fn.getenv 'HOME' .. '/.local/bin/sumneko_lua/bin/Linux/lua-language-server' },
+  cmd = { vim.fn.getenv 'HOME' .. '/.local/lib/sumneko_lua/bin/lua-language-server' },
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
