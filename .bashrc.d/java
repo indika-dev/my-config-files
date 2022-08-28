@@ -1,3 +1,3 @@
-export JAVA_HOME=/home/stefan/.local/lib/jvm-8
-export JAVA_HOME=/home/stefan/.local/lib/jvm-17
-export PATH=$PATH:$JAVA_HOME/bin
+#export JAVA_HOME=/home/stefan/.local/lib/jvm-8
+#export JAVA_HOME=/home/stefan/.local/lib/jvm-17
+#export PATH=$PATH:$JAVA_HOME/bin
