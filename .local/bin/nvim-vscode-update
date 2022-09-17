@@ -3,32 +3,28 @@
 # usage: github-install user/repo
 set -e
 
-repo=$1
-tmp=/tmp/.github-install/
-#targetDir=/home/stefan/.local/lib/
-targetDir=/home/stefan/tmp/tmp2/
-binpath="$HOME/.local/bin"
+targetDir=/home/stefan/.local/lib/
 
 checkNewRelease() {
-  local filename=""
+	local filename=""
 
-  PS3="Select download file: "
-  select filename in $(curl -s $url | jq -r '.assets[].name'); do break; done
-  echo "${filename}"
+	PS3="Select download file: "
+	select filename in $(curl -s "$url" | jq -r '.assets[].name'); do break; done
+	echo "${filename}"
 }
 
 update() {
-local url="https://api.github.com/repos/$1/releases/latest"
-newReleasefile=$(checkNewRelease ${url})
-local downloadedFile="${targetDir}${newReleasefile}"
-if [ ! -d "${downloadedFile}" ]; then
-curl -s $url | jq -r --arg filename "${newReleasefile}" '.assets[] | select(.name == $filename) | .browser_download_url' | wget -i- -q --show-progress -P "${downloadedFile}"
-unzip -qq "${downloadedFile}/${newReleasefile}" -d "${targetDir}${newReleasefile}"
-rm -f "${downloadedFile}/${newReleasefile}"
-echo "${downloadedFile}"
-else
-echo ""
-fi
+	local url="https://api.github.com/repos/$1/releases/latest"
+	newReleasefile=$(checkNewRelease "${url}")
+	local downloadedFile="${targetDir}${newReleasefile}"
+	if [ ! -d "${downloadedFile}" ]; then
+		curl -s "$url" | jq -r --arg filename "${newReleasefile}" '.assets[] | select(.name == $filename) | .browser_download_url' | wget -i- -q --show-progress -P "${downloadedFile}"
+		unzip -qq "${downloadedFile}/${newReleasefile}" -d "${targetDir}${newReleasefile}"
+		rm -f "${downloadedFile}/${newReleasefile}"
+		echo "${downloadedFile}"
+	else
+		echo ""
+	fi
 }
 
 echo "updating redhat-developer/vscode-java"
@@ -37,9 +33,9 @@ updatedPlugin=$(update redhat-developer/vscode-java)
 if [ -z "${updatedPlugin}" ]; then
 	echo "already up to date"
 else
-	rm -f ${targetDir}/vscode-java-jdtls
-	ln -s ${updatedPlugin}/extension/server ${targetDir}/vscode-jdtls
-	find ${updatedPlugin} -name lombok*.jar -exec cp {} ${updatedPlugin}/extension/server/lombok.jar \;
+	rm -f "${targetDir}/vscode-java-jdtls"
+	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-jdtls"
+	find "${updatedPlugin}" -name "lombok*.jar" -exec cp {} "${updatedPlugin}/extension/server/lombok.jar" \;
 	echo "updated ${updatedPlugin}"
 fi
 
@@ -49,8 +45,8 @@ updatedPlugin=$(update microsoft/vscode-java-test)
 if [ -z "${updatedPlugin}" ]; then
 	echo "already up to date"
 else
-	rm -f ${targetDir}/vscode-java-test
-	ln -s ${updatedPlugin}/extension/server ${targetDir}/vscode-java-test
+	rm -f "${targetDir}/vscode-java-test"
+	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-java-test"
 	echo "updated ${updatedPlugin}"
 fi
 
@@ -60,7 +56,7 @@ updatedPlugin=$(update microsoft/vscode-java-debug)
 if [ -z "${updatedPlugin}" ]; then
 	echo "already up to date"
 else
-	rm -f ${targetDir}/vscode-java-debug
-	ln -s ${updatedPlugin}/extension/server ${targetDir}/vscode-java-debug
+	rm -f "${targetDir}/vscode-java-debug"
+	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-java-debug"
 	echo "updated ${updatedPlugin}"
 fi
