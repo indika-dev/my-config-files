@@ -1,0 +1,1 @@
+/home/stefan/.sdkman/bin/sdkman-init.sh
