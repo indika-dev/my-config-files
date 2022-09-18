@@ -36,9 +36,12 @@ else
 	rm -f "${targetDir}/vscode-java-jdtls"
 	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-jdtls"
 	find "${updatedPlugin}" -name "lombok*.jar" -exec cp {} "${updatedPlugin}/extension/server/lombok.jar" \;
+	find "${updatedPlugin}" -wholename "${updatedPlugin}/extension/jre/*linux-x86_64" -exec ln -s {} "${updatedPlugin}/extension/server/jre" \;
 	echo "updated ${updatedPlugin}"
 fi
 
+echo
+echo "------------"
 echo "updating microsoft/vscode-java-test"
 echo
 updatedPlugin=$(update microsoft/vscode-java-test)
@@ -50,6 +53,8 @@ else
 	echo "updated ${updatedPlugin}"
 fi
 
+echo
+echo "------------"
 echo "updating microsoft/vscode-java-debug"
 echo
 updatedPlugin=$(update microsoft/vscode-java-debug)
