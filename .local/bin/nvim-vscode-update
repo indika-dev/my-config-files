@@ -33,10 +33,12 @@ updatedPlugin=$(update redhat-developer/vscode-java)
 if [ -z "${updatedPlugin}" ]; then
 	echo "already up to date"
 else
-	rm -f "${targetDir}/vscode-java-jdtls"
+	rm -rf "${targetDir}/vscode-java-jdtls"
 	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-jdtls"
 	find "${updatedPlugin}" -name "lombok*.jar" -exec cp {} "${updatedPlugin}/extension/server/lombok.jar" \;
 	find "${updatedPlugin}" -wholename "${updatedPlugin}/extension/jre/*linux-x86_64" -exec ln -s {} "${updatedPlugin}/extension/server/jre" \;
+	# find /home/stefan/.local/share/nvim/lsp_servers/jdtls ! -name 'nvim-lsp-installer-receipt.json' ! -name 'jdtls' -exec rm -rf {} +
+	# cp -R "${targetDir}/vscode-jdtls" /home/stefan/.local/share/nvim/lsp_servers/jdtls
 	echo "updated ${updatedPlugin}"
 fi
 
