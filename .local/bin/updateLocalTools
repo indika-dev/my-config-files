@@ -1,0 +1,11 @@
+#!/bin/sh
+
+github-install.sh junegunn/fzf
+github-install.sh JohnnyMorganz/StyLua
+github-install.sh sharkdp/fd
+github-install.sh charmbracelet/glow
+github-install.sh jesseduffield/lazygit
+github-install.sh BurntSushi/ripgrep
+github-install.sh koalaman/shellcheck
+github-install.sh UltiRequiem/yamlfmt
+pip3 install yamllint --upgrade
