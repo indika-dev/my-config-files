@@ -1589,7 +1589,7 @@ window.opacity: 1.0
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: C:/Windows/System32/wsl.exe
+  program: C:/Windows/System32/wsl.exe --cd ~
   # program: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 #  args:
 #    - --login

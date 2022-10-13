@@ -4,8 +4,12 @@
     "actions": 
     [
         {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
             "command": "paste",
-            "keys": "ctrl+shift+v"
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -13,11 +17,7 @@
                 "action": "copy",
                 "singleLine": false
             },
-            "keys": "ctrl+shift+c"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "keys": "ctrl+c"
         },
         {
             "command": 
@@ -31,51 +31,23 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{a99d3bc0-0407-50bc-9051-8d0d088de641}",
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
     "profiles": 
     {
         "defaults": {},
         "list": 
         [
             {
-                "colorScheme": "Ayu",
-                "font": 
-                {
-                    "face": "FiraCode NF Retina",
-                    "size": 11
-                },
-                "guid": "{639d9e7f-51b3-5af2-8625-118dd6674fe9}",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "icon": "C:\\Lokales\\vm\\wsl\\clearlinux\\clearlinux.png",
-                "name": "Clear Linux",
-                "source": "Windows.Terminal.Wsl"
+                "name": "Windows PowerShell"
             },
             {
-                "colorScheme": "Ayu Mirage",
-                "font": 
-                {
-                    "face": "CaskaydiaCove NF",
-                    "size": 12
-                },
-                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
-                "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
-            },
-            {
-                "antialiasingMode": "cleartype",
-                "bellStyle": "none",
-                "colorScheme": "Ayu Mirage",
-                "font": 
-                {
-                    "face": "CaskaydiaCove NF",
-                    "size": 12
-                },
-                "guid": "{190101b4-7fde-5219-90b2-0947ed51033f}",
-                "hidden": false,
-                "icon": "C:\\Lokales\\vm\\wsl\\fedora\\fedora.png",
-                "name": "fedora",
-                "source": "Windows.Terminal.Wsl"
+                "name": "Eingabeaufforderung"
             },
             {
                 "guid": "{d3f31bee-5823-5ed8-8e04-f31ed54f2cd9}",
@@ -84,108 +56,39 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "colorScheme": "Ayu Mirage",
-                "font": 
-                {
-                    "face": "CaskaydiaCove NF"
-                },
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "guid": "{639d9e7f-51b3-5af2-8625-118dd6674fe9}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "clearlinux",
+                "source": "Windows.Terminal.Wsl"
             },
             {
-                "colorScheme": "Tango Dark",
-                "font": 
-                {
-                    "face": "Cascadia Code PL"
-                },
-                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "guid": "{190101b4-7fde-5219-90b2-0947ed51033f}",
                 "hidden": false,
-                "name": "Eingabeaufforderung"
+                "name": "fedora",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": true,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": true,
+                "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "colorScheme": "Ayu Mirage",
-                "commandline": "C:\\ProgramData\\chocolatey\\lib\\gsudo\\bin\\gsudo.exe powershell.exe",
-                "guid": "{a99d3bc0-0407-50bc-9051-8d0d088de641}",
-                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
-                "name": "PowerShell(Admin)",
-                "tabTitle": "PowerShell"
-            },
-            {
-                "commandline": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw-w64.bat",
-                "guid": "{7dee22e8-fd42-5c82-9fa9-9ad072dda177}",
-                "icon": "C:\\Lokales\\development\\Mingw64.png",
-                "name": "Mingw64"
-            },
-            {
-                "background": "#350425",
-                "commandline": "multipass shell",
-                "cursorShape": "filledBox",
-                "font": 
-                {
-                    "face": "Ubuntu Mono"
-                },
-                "guid": "{aaaa9e6d-1e09-4be6-b76c-82b4ba1885fb}",
-                "historySize": 50000,
-                "icon": "C:/Program Files/Multipass/bin/multipass_wt.ico",
-                "name": "Multipass"
+                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
             }
         ]
     },
     "schemes": 
     [
-        {
-            "background": "#0F1419",
-            "black": "#000000",
-            "blue": "#36A3D9",
-            "brightBlack": "#323232",
-            "brightBlue": "#68D5FF",
-            "brightCyan": "#C7FFFD",
-            "brightGreen": "#EAFE84",
-            "brightPurple": "#FFA3AA",
-            "brightRed": "#FF6565",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#FFF779",
-            "cursorColor": "#F29718",
-            "cyan": "#95E6CB",
-            "foreground": "#E6E1CF",
-            "green": "#B8CC52",
-            "name": "Ayu",
-            "purple": "#F07178",
-            "red": "#FF3333",
-            "selectionBackground": "#253340",
-            "white": "#FFFFFF",
-            "yellow": "#E7C547"
-        },
-        {
-            "background": "#1F2430",
-            "black": "#191E2A",
-            "blue": "#6DCBFA",
-            "brightBlack": "#686868",
-            "brightBlue": "#73D0FF",
-            "brightCyan": "#95E6CB",
-            "brightGreen": "#BAE67E",
-            "brightPurple": "#D4BFFF",
-            "brightRed": "#F28779",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#FFD580",
-            "cursorColor": "#FFCC66",
-            "cyan": "#90E1C6",
-            "foreground": "#CBCCC6",
-            "green": "#A6CC70",
-            "name": "Ayu Mirage",
-            "purple": "#CFBAFA",
-            "red": "#ED8274",
-            "selectionBackground": "#33415E",
-            "white": "#C7C7C7",
-            "yellow": "#FAD07B"
-        },
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -302,29 +205,6 @@
             "yellow": "#C18301"
         },
         {
-            "background": "#1E2127",
-            "black": "#1E2127",
-            "blue": "#61AFEF",
-            "brightBlack": "#5C6370",
-            "brightBlue": "#61AFEF",
-            "brightCyan": "#56B6C2",
-            "brightGreen": "#98C379",
-            "brightPurple": "#C678DD",
-            "brightRed": "#E06C75",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#D19A66",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#56B6C2",
-            "foreground": "#ABB2BF",
-            "green": "#98C379",
-            "name": "OneDark",
-            "purple": "#C678DD",
-            "red": "#E06C75",
-            "selectionBackground": "#FFFFFF",
-            "white": "#ABB2BF",
-            "yellow": "#D19A66"
-        },
-        {
             "background": "#002B36",
             "black": "#002B36",
             "blue": "#268BD2",
@@ -415,29 +295,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#D3D7CF",
             "yellow": "#C4A000"
-        },
-        {
-            "background": "#16161E",
-            "black": "#363B54",
-            "blue": "#7AA2F7",
-            "brightBlack": "#363B54",
-            "brightBlue": "#7AA2F7",
-            "brightCyan": "#7DCFFF",
-            "brightGreen": "#41A6B5",
-            "brightPurple": "#BB9AF7",
-            "brightRed": "#F7768E",
-            "brightWhite": "#ACB0D0",
-            "brightYellow": "#E0AF68",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#7DCFFF",
-            "foreground": "#787C99",
-            "green": "#41A6B5",
-            "name": "TokyoNight",
-            "purple": "#BB9AF7",
-            "red": "#F7768E",
-            "selectionBackground": "#FFFFFF",
-            "white": "#787C99",
-            "yellow": "#E0AF68"
         },
         {
             "background": "#300A24",

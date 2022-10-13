@@ -71,10 +71,12 @@ end
 return {
 	add_wsl_distributions_to_launch_menu = true,
 	font = wezterm.font("FiraCode NF", {weight=450}),
-    font_size = 11,
+    font_size = 12,
 	color_scheme = "Ayu Mirage",
+	-- color_scheme = "Gruvbox (Gogh)",
+	-- color_scheme = "ayu_light",
 	default_prog = { "wsl", "--cd", "~" },
-	hide_tab_bar_if_only_one_tab = false,
+	hide_tab_bar_if_only_one_tab = true,
 	launch_menu = launch_menu,
 	tls_clients = {
 		{
