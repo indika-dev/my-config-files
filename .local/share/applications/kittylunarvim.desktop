@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 Name=LunarVim on Kitty
 Comment=LunarVim on Kitty
-Exec=/var/home/stefan/.local/bin/kitty -o allow_remote_control=yes --single-instance --listen-on unix:@mykitty /home/stefan/.local/bin/lvim %F
+Exec=/home/stefan/.local/bin/kitty -o allow_remote_control=yes --single-instance --listen-on unix:@mykitty /home/stefan/.local/bin/lvim %F
 Keywords=Text;Editor;
 Categories=Utility;TextEditor;
 Icon=spacekitty.png

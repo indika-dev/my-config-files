@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Jagged Alliance 2
-Exec=/var/home/stefan/Applications/ja2-stracciatella_0.19.1-git+6ad1b6f_x86-64.AppImage
+Exec=/home/stefan/Applications/ja2-stracciatella_0.19.1-git+6ad1b6f_x86-64.AppImage
 Type=Application
 Icon=ja2
 StartupNotify=true

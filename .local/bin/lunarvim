@@ -4,10 +4,13 @@ set -euo pipefail
 export NEOVIDE_MULTIGRID=true
 export NEOVIDE_APP_ID="neovide"
 export NEOVIDE_WM_CLASS="neovide","neovide"
+export NEOVIDE_MAXIMIZED=true
+
 
 export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-/home/stefan/.config/lvim}"
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-/home/stefan/.local/share/lunarvim}"
-export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-/var/home/stefan/.cache/lvim}"
+export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-/home/stefan/.cache/lvim}"
 
-exec neovide -- -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+exec /home/stefan/.local/bin/neovide -- -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
 # exec nvui -- -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
+# --x11-wm-class-instance <x11_wm_class_instance> or $NEOVIDE_WM_CLASS_INSTANCE

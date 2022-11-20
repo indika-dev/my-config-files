@@ -1,1 +1,1 @@
-/usr/share/bash-completion/completions/fd.bash
+/home/stefan/.config/fd/autocomplete/fd.bash

@@ -35,7 +35,7 @@ end)
 
 return {
 	color_scheme = "Ayu Mirage",
-	default_prog = { "/usr/bin/toolbox", "enter" },
+	-- default_prog = { "/usr/bin/toolbox", "enter" },
 	hide_tab_bar_if_only_one_tab = true,
 	-- font = wezterm.font("JetBrainsMono Nerd Font"),
 	font = wezterm.font("CaskaydiaCove Nerd Font"),
