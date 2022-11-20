@@ -1,0 +1,18 @@
+[Unit]
+Description=Run backup for user stefan
+DefaultDependencies=no
+Requires=default.target
+After=default.target
+
+[Service]
+Environment="HOME=/home/stefan/"
+Type=oneshot
+ExecStart=/usr/bin/bash -c "cd /home/stefan && /home/stefan/.local/bin/backup"
+# ignore missing directory return result
+SuccessExitStatus=23
+TimeoutStartSec=0
+RemainAfterExit=No
+
+
+[Install]
+WantedBy=default.target

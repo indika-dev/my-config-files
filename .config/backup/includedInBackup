@@ -13,6 +13,7 @@ workspace/
 .config/fzf/
 .config/joplin-desktop/
 .config/keepassxc/
+.dotfiles/
 .ssh/
 .gnupg/
 .local/lib/libsndio.so

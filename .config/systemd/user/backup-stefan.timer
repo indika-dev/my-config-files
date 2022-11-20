@@ -1,0 +1,10 @@
+[Unit]
+Description=Data backup timer
+Requires=backup-stefan.service
+
+[Timer]
+OnCalendar=daily
+Unit=backup-stefan.service
+
+[Install]
+WantedBy=timers.target
