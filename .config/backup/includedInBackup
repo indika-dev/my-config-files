@@ -21,11 +21,11 @@ workspace/
 .local/share/applications
 .local/share/backgrounds
 .local/share/diasurgical
-./local/share/fonts
-./local/share/gnome-background-properties
-./local/share/icons
+.local/share/fonts
+.local/share/gnome-background-properties
+.local/share/icons
 .local/share/linux-dwarf-pack
-./local/share/themes
+.local/share/themes
 .ja2/
 .password-store/
 .var/app/org.zdoom.GZDoom/.config/gzdoom/

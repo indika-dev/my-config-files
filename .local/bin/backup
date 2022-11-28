@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rsync -avzh --progress --files-from="$HOME/.config/backup/includedInBackup" --password-file="$HOME/.ssh/rsyncd" "$HOME" rsync://rsync@192.168.1.80/homes/stefan/backup/stefan-laptop/
+rsync -avzhr --delete --progress --files-from="$HOME/.config/backup/includedInBackup" --password-file="$HOME/.ssh/rsyncd" "$HOME" rsync://rsync@192.168.1.80/homes/stefan/backup/stefan-laptop/
