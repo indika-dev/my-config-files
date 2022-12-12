@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export NEOVIDE_MULTIGRID=true
-export NEOVIDE_APP_ID="neovide"
-export NEOVIDE_WM_CLASS="neovide","neovide"
-export NEOVIDE_MAXIMIZED=true
-
+# export NEOVIDE_MULTIGRID=true
+# export NEOVIDE_APP_ID="neovide"
+# export NEOVIDE_WM_CLASS="neovide","neovide"
+# export NEOVIDE_MAXIMIZED=true
 
 export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-/home/stefan/.config/lvim}"
 export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-/home/stefan/.local/share/lunarvim}"

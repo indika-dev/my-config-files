@@ -1,3 +1,4 @@
-export NEOVIDE_MULTIGRID="enable"
+export NEOVIDE_MULTIGRID=true
+export NEOVIDE_MAXIMIZED=true
 export COLORTERM=truecolor
 export EDITOR=lvim
