@@ -1,0 +1,17 @@
+[Unit]
+Description=Run offline update automatically
+DefaultDependencies=no
+Requires=default.target
+After=default.target
+
+[Service]
+Environment="HOME=/home/stefan/"
+Type=oneshot
+ExecStart=/usr/bin/bash -c "pkcon refresh force && pkcon update --only-download && pkcon offline-trigger"
+SuccessExitStatus=5 0
+TimeoutStartSec=0
+RemainAfterExit=No
+
+
+[Install]
+WantedBy=default.target

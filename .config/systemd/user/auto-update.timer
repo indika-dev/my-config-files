@@ -1,0 +1,11 @@
+[Unit]
+Description=trigger offline updates for next boot
+Requires=auto-update.service
+
+[Timer]
+OnCalendar=daily
+OnStartupSec=10min	
+Unit=auto-update.service
+
+[Install]
+WantedBy=timers.target
