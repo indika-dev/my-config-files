@@ -1,8 +1,7 @@
 [Unit]
 Description=Run offline update automatically
 DefaultDependencies=no
-Requires=default.target
-After=default.target
+Wants=auto-update.timer
 
 [Service]
 Environment="HOME=/home/stefan/"
