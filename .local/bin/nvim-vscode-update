@@ -1,0 +1,67 @@
+#!/bin/bash
+# sudo apt install jq wget curl
+# usage: github-install user/repo
+set -e
+
+targetDir=/home/stefan/.local/lib/
+
+checkNewRelease() {
+	local filename=""
+
+	PS3="Select download file: "
+	select filename in $(curl -s "$url" | jq -r '.assets[].name'); do break; done
+	echo "${filename}"
+}
+
+update() {
+	local url="https://api.github.com/repos/$1/releases/latest"
+	newReleasefile=$(checkNewRelease "${url}")
+	local downloadedFile="${targetDir}${newReleasefile}"
+	if [ ! -d "${downloadedFile}" ]; then
+		curl -s "$url" | jq -r --arg filename "${newReleasefile}" '.assets[] | select(.name == $filename) | .browser_download_url' | wget -i- -q --show-progress -P "${downloadedFile}"
+		unzip -qq "${downloadedFile}/${newReleasefile}" -d "${targetDir}${newReleasefile}"
+		rm -f "${downloadedFile}/${newReleasefile}"
+		echo "${downloadedFile}"
+	else
+		echo ""
+	fi
+}
+
+echo "updating redhat-developer/vscode-java"
+echo
+updatedPlugin=$(update redhat-developer/vscode-java)
+if [ -z "${updatedPlugin}" ]; then
+	echo "already up to date"
+else
+	rm -f "${targetDir}/vscode-java-jdtls"
+	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-jdtls"
+	find "${updatedPlugin}" -name "lombok*.jar" -exec cp {} "${updatedPlugin}/extension/server/lombok.jar" \;
+	find "${updatedPlugin}" -wholename "${updatedPlugin}/extension/jre/*linux-x86_64" -exec ln -s {} "${updatedPlugin}/extension/server/jre" \;
+	echo "updated ${updatedPlugin}"
+fi
+
+echo
+echo "------------"
+echo "updating microsoft/vscode-java-test"
+echo
+updatedPlugin=$(update microsoft/vscode-java-test)
+if [ -z "${updatedPlugin}" ]; then
+	echo "already up to date"
+else
+	rm -f "${targetDir}/vscode-java-test"
+	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-java-test"
+	echo "updated ${updatedPlugin}"
+fi
+
+echo
+echo "------------"
+echo "updating microsoft/vscode-java-debug"
+echo
+updatedPlugin=$(update microsoft/vscode-java-debug)
+if [ -z "${updatedPlugin}" ]; then
+	echo "already up to date"
+else
+	rm -f "${targetDir}/vscode-java-debug"
+	ln -s "${updatedPlugin}/extension/server" "${targetDir}/vscode-java-debug"
+	echo "updated ${updatedPlugin}"
+fi
