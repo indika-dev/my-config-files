@@ -1,11 +1,5 @@
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Setup fzf
-# ---------
-# if [[ ! "$PATH" == */var/home/linuxbrew/.linuxbrew/opt/fzf/bin* ]]; then
-#  export PATH="${PATH:+${PATH}:}/var/home/linuxbrew/.linuxbrew/opt/fzf/bin"
-# fi
-
 # Auto-completion
 # ---------------
 [[ $- == *i* ]] && source "/home/stefan/.config/fzf/completion.bash" 2> /dev/null

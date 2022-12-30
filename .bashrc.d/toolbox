@@ -1,5 +1,0 @@
-alias istoolbx='[ -f "/run/.toolboxenv" ] && grep -oP "(?<=name=\")[^\";]+" /run/.containerenv'
-
-if [[ $(istoolbx) ]]; then
-	export PULSE_SERVER=/run/user/$(id -ru)/pulse/native
-fi

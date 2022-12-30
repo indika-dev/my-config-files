@@ -13,6 +13,7 @@ workspace/
 .config/fzf/
 .config/joplin-desktop/
 .config/keepassxc/
+.config/backup/
 .dotfiles/
 .ssh/
 .gnupg/
