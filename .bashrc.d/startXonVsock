@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+return
 if [[ -z $(pidof -s socat) ]]; then
 	if [[ -S /tmp/.X11-unix/X0 ]]; then
 		rm /tmp/.X11-unix/X0
