@@ -1,94 +1,173 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
+local utils = require("utils")
+local keybinds = require("keybinds")
+local scheme = wezterm.get_builtin_color_schemes()["nord"]
+local gpus = wezterm.gui.enumerate_gpus()
+require("on")
 
--- local default_prog
+-- /etc/ssh/sshd_config
+-- AcceptEnv TERM_PROGRAM_VERSION COLORTERM TERM TERM_PROGRAM WEZTERM_REMOTE_PANE
+-- sudo systemctl reload sshd
 
--- The filled in variant of the < symbol
-local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-
--- The filled in variant of the > symbol
-local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
-
-function layout_startup()
-	local win, tab, pane1 = SpawnWindow(0, 0, 0, 0, true) -- new window at x,y=(0,0) r,c=(0,0) and true is "maximized"
-	local pane2 = pane:SplitHorizontal(0.6, 0.4) -- split, pane1 60% wide, pane2 40% wide
-	local pane3 = pane2:SplitVertical(0.5, 0.5) -- split, pane2 50% high and pane3 50% high
-	local tab2 = win:SpawnTab()
-	-- more splits, etc.
-	local win, tab, pane1 = SpawnWindow(0, 0, r, 0, false) -- new window at x,y=(50,100) h,w=(24,80) and not "maximized"
-	-- more split, tab, windows
+---------------------------------------------------------------
+--- functions
+---------------------------------------------------------------
+local function enable_wayland()
+	local wayland = os.getenv("XDG_SESSION_TYPE")
+	if wayland == "wayland" then
+		return true
+	end
+	return false
 end
 
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	local pane_title = tab.active_pane.title
-	local user_title = tab.active_pane.user_vars.panetitle
-
-	if user_title ~= nil and #user_title > 0 then
-		pane_title = user_title
+---------------------------------------------------------------
+--- Merge the Config
+---------------------------------------------------------------
+local function create_ssh_domain_from_ssh_config(ssh_domains)
+	if ssh_domains == nil then
+		ssh_domains = {}
 	end
+	for host, config in pairs(wezterm.enumerate_ssh_hosts()) do
+		table.insert(ssh_domains, {
+			name = host,
+			remote_address = config.hostname .. ":" .. config.port,
+			username = config.user,
+			multiplexing = "None",
+			assume_shell = "Posix",
+		})
+	end
+	return { ssh_domains = ssh_domains }
+end
 
-	return {
-		{ Background = { Color = "blue" } },
-		{ Foreground = { Color = "white" } },
-		{ Text = " " .. pane_title .. " " },
-	}
-end)
+--- load local_config
+-- Write settings you don't want to make public, such as ssh_domains
+package.path = os.getenv("HOME") .. "/.local/share/wezterm/?.lua;" .. package.path
+local function load_local_config(module)
+	local m = package.searchpath(module, package.path)
+	if m == nil then
+		return {}
+	end
+	return dofile(m)
+	-- local ok, _ = pcall(require, "local")
+	-- if not ok then
+	-- 	return {}
+	-- end
+	-- return require("local")
+end
 
-return {
-	-- color_scheme = "Ayu Mirage",
-	-- color_scheme = "Kanagawa (Gogh)",
-	color_scheme = "kanagawabones",
-	hide_tab_bar_if_only_one_tab = true,
+local local_config = load_local_config("local")
+
+-- local local_config = {
+-- 	ssh_domains = {
+-- 		{
+-- 			-- This name identifies the domain
+-- 			name = "my.server",
+-- 			-- The address to connect to
+-- 			remote_address = "192.168.8.31",
+-- 			-- The username to use on the remote host
+-- 			username = "katayama",
+-- 		},
+-- 	},
+-- }
+-- return local_config
+
+---------------------------------------------------------------
+--- Config
+---------------------------------------------------------------
+local config = {
 	font = wezterm.font("CaskaydiaCove Nerd Font"),
 	-- font = wezterm.font("FiraCode Nerd Font Mono"),
-	font_size = 16.0,
-	tab_bar_style = {
-		new_tab = wezterm.format({
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#2b2042" } },
-			{ Text = SOLID_LEFT_ARROW },
-		}),
-		new_tab_hover = wezterm.format({
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#2b2042" } },
-			{ Text = SOLID_RIGHT_ARROW },
-		}),
+	font_size = 14.0,
+	-- cell_width = 1.1,
+	-- line_height = 1.1,
+	-- font_rules = {
+	-- 	{
+	-- 		italic = true,
+	-- 		font = wezterm.font("Cica", { italic = true }),
+	-- 	},
+	-- 	{
+	-- 		italic = true,
+	-- 		intensity = "Bold",
+	-- 		font = wezterm.font("Cica", { weight = "Bold", italic = true }),
+	-- 	},
+	-- },
+	check_for_updates = false,
+	use_ime = true,
+	-- ime_preedit_rendering = "System",
+	use_dead_keys = false,
+	warn_about_missing_glyphs = false,
+	-- enable_kitty_graphics = false,
+	animation_fps = 1,
+	cursor_blink_ease_in = "Constant",
+	cursor_blink_ease_out = "Constant",
+	cursor_blink_rate = 0,
+	-- enable_wayland = enable_wayland(),
+	-- https://github.com/wez/wezterm/issues/1772
+	enable_wayland = true,
+	-- color_scheme = "nordfox",
+	force_reverse_video_cursor = true,
+	colors = {
+		foreground = "#dcd7ba",
+		background = "#1f1f28",
+
+		cursor_bg = "#c8c093",
+		cursor_fg = "#c8c093",
+		cursor_border = "#c8c093",
+
+		selection_fg = "#c8c093",
+		selection_bg = "#2d4f67",
+
+		scrollbar_thumb = "#16161d",
+		split = "#16161d",
+
+		ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
+		brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
+		indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
 	},
-	leader = { key = "#", mods = "CTRL|ALT", timeout_milliseconds = 1000 },
-	keys = {
-		-- This will create a new split and run your default program inside it
-		{
-			key = "|",
-			mods = "LEADER",
-			action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
-		},
-		{
-			key = ".",
-			mods = "LEADER",
-			action = wezterm.action({ SplitVertical = { args = { "/usr/bin/toolbox", "enter" } } }),
-		},
-		{ key = "n", mods = "LEADER", action = "ShowTabNavigator" },
-		{ key = "l", mods = "LEADER", action = "ShowLauncher" },
-		{ key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
-		{ key = "t", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
-		{ key = "h", mods = "LEADER|CTRL", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
-		{ key = "j", mods = "LEADER|CTRL", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-		{ key = "k", mods = "LEADER|CTRL", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-		{ key = "l", mods = "LEADER|CTRL", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-		{ key = "H", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Left", 5 } }) },
-		{ key = "J", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Down", 5 } }) },
-		{ key = "K", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Up", 5 } }) },
-		{ key = "L", mods = "LEADER|SHIFT", action = wezterm.action({ AdjustPaneSize = { "Right", 5 } }) },
-		{ key = "1", mods = "LEADER", action = wezterm.action({ ActivateTab = 0 }) },
-		{ key = "2", mods = "LEADER", action = wezterm.action({ ActivateTab = 1 }) },
-		{ key = "3", mods = "LEADER", action = wezterm.action({ ActivateTab = 2 }) },
-		{ key = "4", mods = "LEADER", action = wezterm.action({ ActivateTab = 3 }) },
-		{ key = "5", mods = "LEADER", action = wezterm.action({ ActivateTab = 4 }) },
-		{ key = "6", mods = "LEADER", action = wezterm.action({ ActivateTab = 5 }) },
-		{ key = "7", mods = "LEADER", action = wezterm.action({ ActivateTab = 6 }) },
-		{ key = "8", mods = "LEADER", action = wezterm.action({ ActivateTab = 7 }) },
-		{ key = "9", mods = "LEADER", action = wezterm.action({ ActivateTab = 8 }) },
-		{ key = "q", mods = "LEADER", action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
-		{ key = "w", mods = "LEADER", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
-		{ key = "F11", mods = "LEADER|SHIFT", action = "ToggleFullScreen" },
+	color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
+	hide_tab_bar_if_only_one_tab = false,
+	adjust_window_size_when_changing_font_size = false,
+	selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%",
+	window_padding = {
+		left = 0,
+		right = 0,
+		top = 0,
+		bottom = 0,
 	},
+	use_fancy_tab_bar = false,
+	colors = {
+		tab_bar = {
+			background = scheme.background,
+			new_tab = { bg_color = "#2e3440", fg_color = scheme.ansi[8], intensity = "Bold" },
+			new_tab_hover = { bg_color = scheme.ansi[1], fg_color = scheme.brights[8], intensity = "Bold" },
+			-- format-tab-title
+			-- active_tab = { bg_color = "#121212", fg_color = "#FCE8C3" },
+			-- inactive_tab = { bg_color = scheme.background, fg_color = "#FCE8C3" },
+			-- inactive_tab_hover = { bg_color = scheme.ansi[1], fg_color = "#FCE8C3" },
+		},
+	},
+	exit_behavior = "CloseOnCleanExit",
+	tab_bar_at_bottom = false,
+	window_close_confirmation = "AlwaysPrompt",
+	-- window_background_opacity = 0.8,
+	disable_default_key_bindings = true,
+	-- visual_bell = {
+	-- 	fade_in_function = "EaseIn",
+	-- 	fade_in_duration_ms = 150,
+	-- 	fade_out_function = "EaseOut",
+	-- 	fade_out_duration_ms = 150,
+	-- },
+	-- separate <Tab> <C-i>
+	enable_csi_u_key_encoding = true,
+	leader = { key = "Space", mods = "CTRL|SHIFT" },
+	keys = keybinds.create_keybinds(),
+	key_tables = keybinds.key_tables,
+	mouse_bindings = keybinds.mouse_bindings,
+	-- https://github.com/wez/wezterm/issues/2756
+	-- webgpu_preferred_adapter = gpus[1],
+	-- front_end = "WebGpu",
 }
+
+local merged_config = utils.merge_tables(config, local_config)
+return utils.merge_tables(merged_config, create_ssh_domain_from_ssh_config(merged_config.ssh_domains))
