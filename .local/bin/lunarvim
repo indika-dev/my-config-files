@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# export NEOVIDE_MULTIGRID=true
+export NEOVIDE_MULTIGRID=true
 # export NEOVIDE_APP_ID="neovide"
 # export NEOVIDE_WM_CLASS="neovide","neovide"
 # export NEOVIDE_MAXIMIZED=true

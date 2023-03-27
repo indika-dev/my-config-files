@@ -34,31 +34,22 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 end)
 
 return {
-	color_scheme = "Ayu Mirage",
-	-- default_prog = { "/usr/bin/toolbox", "enter" },
+	-- color_scheme = "Ayu Mirage",
+	-- color_scheme = "Kanagawa (Gogh)",
+	color_scheme = "kanagawabones",
 	hide_tab_bar_if_only_one_tab = true,
-	-- font = wezterm.font("JetBrainsMono Nerd Font"),
 	font = wezterm.font("CaskaydiaCove Nerd Font"),
-	-- font = wezterm.font("FiraCode Nerd Font Mono", { size = 12 }),
+	-- font = wezterm.font("FiraCode Nerd Font Mono"),
+	font_size = 16.0,
 	tab_bar_style = {
-		active_tab_left = wezterm.format({
+		new_tab = wezterm.format({
 			{ Background = { Color = "#0b0022" } },
 			{ Foreground = { Color = "#2b2042" } },
 			{ Text = SOLID_LEFT_ARROW },
 		}),
-		active_tab_right = wezterm.format({
+		new_tab_hover = wezterm.format({
 			{ Background = { Color = "#0b0022" } },
 			{ Foreground = { Color = "#2b2042" } },
-			{ Text = SOLID_RIGHT_ARROW },
-		}),
-		inactive_tab_left = wezterm.format({
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#1b1032" } },
-			{ Text = SOLID_LEFT_ARROW },
-		}),
-		inactive_tab_right = wezterm.format({
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#1b1032" } },
 			{ Text = SOLID_RIGHT_ARROW },
 		}),
 	},
