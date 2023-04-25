@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local utils = require("utils")
 local keybinds = require("keybinds")
-local scheme = wezterm.get_builtin_color_schemes()["nord"]
+local scheme = wezterm.get_builtin_color_schemes()["kanagawa"]
 local gpus = wezterm.gui.enumerate_gpus()
 require("on")
 
@@ -14,8 +14,8 @@ require("on")
 --- functions
 ---------------------------------------------------------------
 local function enable_wayland()
-	local wayland = os.getenv("XDG_SESSION_TYPE")
-	if wayland == "wayland" then
+	local sessiontype = os.getenv("XDG_SESSION_TYPE")
+	if sessiontype == "wayland" then
 		return true
 	end
 	return false
@@ -76,8 +76,36 @@ local local_config = load_local_config("local")
 --- Config
 ---------------------------------------------------------------
 local config = {
-	font = wezterm.font("CaskaydiaCove Nerd Font"),
-	-- font = wezterm.font("FiraCode Nerd Font Mono"),
+	-- color_scheme = "Ayu Mirage",
+	color_scheme = "Kanagawa (Gogh)",
+	-- color_scheme = "kanagawabones",
+	-- color_scheme = "kanagawa",
+	-- color_schemes = {
+	-- 	["kanagawa"] = {
+	-- 		foreground = "#dcd7ba",
+	-- 		background = "#1f1f28",
+
+	-- 		cursor_bg = "#c8c093",
+	-- 		cursor_fg = "#c8c093",
+	-- 		cursor_border = "#c8c093",
+
+	-- 		selection_fg = "#c8c093",
+	-- 		selection_bg = "#2d4f67",
+
+	-- 		scrollbar_thumb = "#16161d",
+	-- 		split = "#16161d",
+
+	-- 		ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
+	-- 		brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
+	-- 		indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
+	-- 	},
+	-- },
+	color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
+	force_reverse_video_cursor = true,
+	-- font = wezterm.font("JetBrainsMono Nerd Font"),
+	-- font = wezterm.font("CaskaydiaCove Nerd Font"),
+	font = wezterm.font("FiraCode Nerd Font Mono"),
+	-- font = wezterm.font("FiraCode Nerd Font"),
 	font_size = 14.0,
 	-- cell_width = 1.1,
 	-- line_height = 1.1,
@@ -92,7 +120,7 @@ local config = {
 	-- 		font = wezterm.font("Cica", { weight = "Bold", italic = true }),
 	-- 	},
 	-- },
-	check_for_updates = false,
+	check_for_updates = true,
 	use_ime = true,
 	-- ime_preedit_rendering = "System",
 	use_dead_keys = false,
@@ -102,31 +130,10 @@ local config = {
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
 	cursor_blink_rate = 0,
-	-- enable_wayland = enable_wayland(),
+	enable_wayland = enable_wayland(),
 	-- https://github.com/wez/wezterm/issues/1772
-	enable_wayland = true,
-	-- color_scheme = "nordfox",
-	force_reverse_video_cursor = true,
-	colors = {
-		foreground = "#dcd7ba",
-		background = "#1f1f28",
-
-		cursor_bg = "#c8c093",
-		cursor_fg = "#c8c093",
-		cursor_border = "#c8c093",
-
-		selection_fg = "#c8c093",
-		selection_bg = "#2d4f67",
-
-		scrollbar_thumb = "#16161d",
-		split = "#16161d",
-
-		ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
-		brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
-		indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
-	},
-	color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
-	hide_tab_bar_if_only_one_tab = false,
+	-- enable_wayland = false,
+	hide_tab_bar_if_only_one_tab = true,
 	adjust_window_size_when_changing_font_size = false,
 	selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%",
 	window_padding = {
@@ -136,17 +143,6 @@ local config = {
 		bottom = 0,
 	},
 	use_fancy_tab_bar = false,
-	colors = {
-		tab_bar = {
-			background = scheme.background,
-			new_tab = { bg_color = "#2e3440", fg_color = scheme.ansi[8], intensity = "Bold" },
-			new_tab_hover = { bg_color = scheme.ansi[1], fg_color = scheme.brights[8], intensity = "Bold" },
-			-- format-tab-title
-			-- active_tab = { bg_color = "#121212", fg_color = "#FCE8C3" },
-			-- inactive_tab = { bg_color = scheme.background, fg_color = "#FCE8C3" },
-			-- inactive_tab_hover = { bg_color = scheme.ansi[1], fg_color = "#FCE8C3" },
-		},
-	},
 	exit_behavior = "CloseOnCleanExit",
 	tab_bar_at_bottom = false,
 	window_close_confirmation = "AlwaysPrompt",

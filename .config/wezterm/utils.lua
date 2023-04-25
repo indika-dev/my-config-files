@@ -1,7 +1,13 @@
+local wezterm = require("wezterm")
 local M = {}
 
 function M.basename(s)
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
+function M.is_vim(pane)
+	local process_name = M.basename(pane:get_foreground_process_name())
+	return process_name == "nvim" or process_name == "vim" or process_name == "lvim"
 end
 
 function M.merge_tables(t1, t2)

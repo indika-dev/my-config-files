@@ -3,6 +3,27 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local utils = require("utils")
 
+M.split_nav = function(resize_or_move, key)
+	return {
+		key = key,
+		mods = resize_or_move == "resize" and "META" or "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if utils.is_vim(pane) then
+				-- pass the keys through to vim/nvim
+				win:perform_action({
+					SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+				}, pane)
+			else
+				if resize_or_move == "resize" then
+					win:perform_action({ AdjustPaneSize = { M.smart_split_direction_keys[key], 3 } }, pane)
+				else
+					win:perform_action({ ActivatePaneDirection = M.smart_split_direction_keys[key] }, pane)
+				end
+			end
+		end),
+	}
+end
+
 ---------------------------------------------------------------
 --- keybinds
 ---------------------------------------------------------------
@@ -80,6 +101,62 @@ M.default_keybinds = {
 		action = act.RotatePanes("CounterClockwise"),
 	},
 	{ key = "f", mods = "ALT", action = act.RotatePanes("Clockwise") },
+	{
+		key = "h",
+		mods = "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if utils.is_vim(pane) then
+				-- pass the keys through to vim/nvim
+				win:perform_action({
+					SendKey = { key = "h", mods = "CTRL" },
+				}, pane)
+			else
+				win:perform_action({ ActivatePaneDirection = "Left" }, pane)
+			end
+		end),
+	},
+	{
+		key = "l",
+		mods = "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if utils.is_vim(pane) then
+				-- pass the keys through to vim/nvim
+				win:perform_action({
+					SendKey = { key = "l", mods = "CTRL" },
+				}, pane)
+			else
+				win:perform_action({ ActivatePaneDirection = "Right" }, pane)
+			end
+		end),
+	},
+	{
+		key = "k",
+		mods = "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if utils.is_vim(pane) then
+				-- pass the keys through to vim/nvim
+				win:perform_action({
+					SendKey = { key = "k", mods = "CTRL" },
+				}, pane)
+			else
+				win:perform_action({ ActivatePaneDirection = "Up" }, pane)
+			end
+		end),
+	},
+	{
+		key = "j",
+		mods = "CTRL",
+		action = wezterm.action_callback(function(win, pane)
+			if utils.is_vim(pane) then
+				-- pass the keys through to vim/nvim
+				win:perform_action({
+					SendKey = { key = "j", mods = "CTRL" },
+				}, pane)
+			else
+				win:perform_action({ AdjustPaneSize = { "Down", 1 } }, pane)
+			end
+		end),
+	},
 }
 
 function M.create_keybinds()
@@ -88,14 +165,110 @@ end
 
 M.key_tables = {
 	resize_pane = {
-		{ key = "LeftArrow", action = act({ AdjustPaneSize = { "Left", 1 } }) },
-		{ key = "h", action = act({ AdjustPaneSize = { "Left", 1 } }) },
-		{ key = "RightArrow", action = act({ AdjustPaneSize = { "Right", 1 } }) },
-		{ key = "l", action = act({ AdjustPaneSize = { "Right", 1 } }) },
-		{ key = "UpArrow", action = act({ AdjustPaneSize = { "Up", 1 } }) },
-		{ key = "k", action = act({ AdjustPaneSize = { "Up", 1 } }) },
-		{ key = "DownArrow", action = act({ AdjustPaneSize = { "Down", 1 } }) },
-		{ key = "j", action = act({ AdjustPaneSize = { "Down", 1 } }) },
+		{
+			key = "LeftArrow",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "h", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Left", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "h",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "h", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Left", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "RightArrow",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "l", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Right", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "l",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "l", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Right", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "UpArrow",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "k", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Up", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "k",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "k", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Up", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "DownArrow",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "j", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Down", 1 } }, pane)
+				end
+			end),
+		},
+		{
+			key = "j",
+			action = wezterm.action_callback(function(win, pane)
+				if utils.is_vim(pane) then
+					-- pass the keys through to vim/nvim
+					win:perform_action({
+						SendKey = { key = "j", mods = "ALT" },
+					}, pane)
+				else
+					win:perform_action({ AdjustPaneSize = { "Down", 1 } }, pane)
+				end
+			end),
+		},
 		-- Cancel the mode by pressing escape
 		{ key = "Escape", action = "PopKeyTable" },
 	},
@@ -261,6 +434,18 @@ M.mouse_bindings = {
 		mods = "CTRL",
 		action = "OpenLinkAtMouseCursor",
 	},
+}
+
+M.smart_split_direction_keys = {
+	Left = "h",
+	Down = "j",
+	Up = "k",
+	Right = "l",
+	-- reverse lookup
+	h = "Left",
+	j = "Down",
+	k = "Up",
+	l = "Right",
 }
 
 return M

@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local utils = require("utils")
 local keybinds = require("keybinds")
-local scheme = wezterm.get_builtin_color_schemes()["nord"]
+local scheme = wezterm.color.get_builtin_schemes()["Kanagawa (Gogh)"]
 local act = wezterm.action
 
 local function create_tab_title(tab, tabs, panes, config, hover, max_width)
@@ -80,7 +80,7 @@ local function update_window_background(window, pane)
 		return
 	end
 	if pane:get_user_vars().production == "1" then
-		overrides.color_scheme = "OneHalfDark"
+		overrides.color_scheme = "Kanagawa (Gogh)"
 	end
 	window:set_config_overrides(overrides)
 end
